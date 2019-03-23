@@ -1,6 +1,7 @@
 import NoConfiguration from './noConfiguration.js';
 import ConfigurationLoaded from './configurationLoaded.js';
 import ConfigureAccounts from './configureAccounts.js';
+import AddSnapshot from './addSnapshot.js';
 
 const NEW_CONFIGURATION = {
   accounts: [],
