@@ -1,7 +1,7 @@
-import NoConfiguration from './noConfiguration.js';
-import ConfigurationLoaded from './configurationLoaded.js';
-import ConfigureAccounts from './configureAccounts.js';
-import AddSnapshot from './addSnapshot.js';
+import NoConfiguration from './src/noConfiguration.js';
+import ConfigurationLoaded from './src/configurationLoaded.js';
+import ConfigureAccounts from './src/configureAccounts.js';
+import AddSnapshot from './src/addSnapshot.js';
 
 const NEW_CONFIGURATION = {
   accounts: [],
