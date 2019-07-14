@@ -12,6 +12,7 @@ const App = () => {
   var configuration = null;
   var isConfigurationLoaded = false;
   var isConfiguringAccounts = false;
+  var isAddingSnapshot = false;
 
   let handleConfigure = () => { isConfiguringAccounts = true; }
   let handleCancelConfiguration = () => { isConfiguringAccounts = false; };
@@ -23,6 +24,13 @@ const App = () => {
   let handleNew = () => {
     configuration = Object.assign({}, NEW_CONFIGURATION);
     isConfigurationLoaded = true;
+  }
+
+  let handleAddSnapshot = () => { isAddingSnapshot = true; }
+  let handleCancelSnapshot = () => { isAddingSnapshot = false; }
+  let handleSaveSnapshot = (snapshot) => {
+    configuration.snapshots.push(snapshot);
+    isAddingSnapshot = false;
   }
 
   let handleFile = () => {
@@ -37,8 +45,14 @@ const App = () => {
           ConfigureAccounts,
           { configuration, handleCancelConfiguration, handleSaveConfiguration }
         )
-      } else if (isConfigurationLoaded) {
-        currentView = m(ConfigurationLoaded, { configuration, handleConfigure });
+      } else if (isConfigurationLoaded && isAddingSnapshot) {
+        currentView = m(
+          AddSnapshot,
+          { accounts: configuration.accounts, handleSaveSnapshot, handleCancelSnapshot }
+        )
+      }
+      else if (isConfigurationLoaded) {
+        currentView = m(ConfigurationLoaded, { configuration, handleConfigure, handleAddSnapshot });
       } else {
         currentView = m(NoConfiguration, { handleNew, handleFile });
       }
