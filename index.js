@@ -32,6 +32,10 @@ const App = () => {
     configuration.snapshots.push(snapshot);
     isAddingSnapshot = false;
   }
+  let handleDeleteSnapshot = snapshotId => {
+    const idx = configuration.snapshots.findIndex(s => s.id == snapshotId);
+    configuration.snapshots.splice(idx, 1);
+  }
 
   let handleFile = () => {
     console.error('File loading not implemented');
@@ -52,7 +56,7 @@ const App = () => {
         )
       }
       else if (isConfigurationLoaded) {
-        currentView = m(ConfigurationLoaded, { configuration, handleConfigure, handleAddSnapshot });
+        currentView = m(ConfigurationLoaded, { configuration, handleConfigure, handleAddSnapshot, handleDeleteSnapshot });
       } else {
         currentView = m(NoConfiguration, { handleNew, handleFile });
       }

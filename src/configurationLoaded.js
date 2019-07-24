@@ -1,10 +1,24 @@
 const ConfigurationLoaded = {
   view: (vnode) => {
-    const { accounts, snapshots } = vnode.attrs.configuration;
+    const {
+      configuration: { accounts, snapshots },
+      handleAddSnapshot,
+      handleDeleteSnapshot,
+      handleConfigure
+    } = vnode.attrs;
+
+    const snapshotEntries = snapshots.map(s => (
+      m('li', [s.date, m('button', { onclick: () => { handleDeleteSnapshot(s.id) } }, 'Remove snapshot')])
+    ));
+
     return m('#configuration-loaded', [
-      m('p', `${accounts.length} account(s) configured, with ${snapshots.length} snapshot(s) captured`),
-      m('button', {type:'button', onclick: vnode.attrs.handleConfigure }, 'Configure accounts'),
-      m('button', {type:'button', disabled: (accounts.length == 0), onclick: vnode.attrs.handleAddSnapshot}, 'Add Snapshot')
+      m('p', `${accounts.length} account(s) configured.`),
+      m('p', `${snapshots.length} snapshot(s) recorded:`),
+      m('ul', [
+        snapshotEntries
+      ]),
+      m('button', { type: 'button', onclick: handleConfigure }, 'Configure accounts'),
+      m('button', { type: 'button', disabled: (accounts.length == 0), onclick: handleAddSnapshot }, 'Add New Snapshot'),
     ]);
   }
 }
