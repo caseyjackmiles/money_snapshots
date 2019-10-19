@@ -1,3 +1,5 @@
+import SnapshotChart from './chart/snapshotChart.js';
+
 const ConfigurationLoaded = {
   view: (vnode) => {
     const {
@@ -19,6 +21,7 @@ const ConfigurationLoaded = {
       ]),
       m('button', { type: 'button', onclick: handleConfigure }, 'Configure accounts'),
       m('button', { type: 'button', disabled: (accounts.length == 0), onclick: handleAddSnapshot }, 'Add New Snapshot'),
+      m(SnapshotChart)
     ]);
   }
 }
