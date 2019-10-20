@@ -2,6 +2,7 @@ import NoConfiguration from './src/noConfiguration.js';
 import ConfigurationLoaded from './src/configurationLoaded.js';
 import ConfigureAccounts from './src/configureAccounts.js';
 import AddSnapshot from './src/addSnapshot.js';
+import chartAdapter from './src/chart/chartAdapter.js';
 
 const NEW_CONFIGURATION = {
   accounts: [],
@@ -56,14 +57,15 @@ const App = () => {
         )
       }
       else if (isConfigurationLoaded) {
-        currentView = m(ConfigurationLoaded, { configuration, handleConfigure, handleAddSnapshot, handleDeleteSnapshot });
+        currentView = m(ConfigurationLoaded, { configuration, handleConfigure, handleAddSnapshot, handleDeleteSnapshot, chartAdapter });
       } else {
         currentView = m(NoConfiguration, { handleNew, handleFile });
       }
 
       return m('main#app', [
         m('h1', 'Account Snapshots'),
-        currentView
+        currentView,
+        m('p', JSON.stringify(configuration)),
       ]);
     }
   }

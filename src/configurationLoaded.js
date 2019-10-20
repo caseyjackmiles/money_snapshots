@@ -6,7 +6,8 @@ const ConfigurationLoaded = {
       configuration: { accounts, snapshots },
       handleAddSnapshot,
       handleDeleteSnapshot,
-      handleConfigure
+      handleConfigure,
+      chartAdapter
     } = vnode.attrs;
 
     const snapshotEntries = snapshots.map(s => (
@@ -21,7 +22,7 @@ const ConfigurationLoaded = {
       ]),
       m('button', { type: 'button', onclick: handleConfigure }, 'Configure accounts'),
       m('button', { type: 'button', disabled: (accounts.length == 0), onclick: handleAddSnapshot }, 'Add New Snapshot'),
-      m(SnapshotChart)
+      m(SnapshotChart, { data: chartAdapter({ accounts, snapshots }) })
     ]);
   }
 }
